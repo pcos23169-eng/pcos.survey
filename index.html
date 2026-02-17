@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCOS/PCOD Health Survey</title>
+
+<style>
+:root{
+--primary:#8a70d6;
+--primary-dark:#6b52b3;
+--bg:#fdfbff;
+--card:#ffffff;
+--text:#333;
+--accent:#e9e4ff;
+--border:#e0e0e0;
+}
+body{
+font-family:'Segoe UI',Roboto,Arial;
+background:var(--bg);
+margin:0;
+padding:20px;
+display:flex;
+justify-content:center;
+}
+.survey-container{
+background:var(--card);
+max-width:750px;
+width:100%;
+padding:40px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(138,112,214,.15);
+}
+.header{text-align:center;margin-bottom:30px}
+h1{color:var(--primary);margin:0 0 10px}
+.desc{color:#777;font-size:.95rem}
+.progress-wrapper{
+background:var(--accent);
+height:10px;
+border-radius:50px;
+margin-bottom:40px;
+overflow:hidden;
+}
+#progress-bar{
+height:100%;
+background:linear-gradient(90deg,var(--primary),var(--primary-dark));
+width:0%;
+transition:.5s;
+}
+.question-block{margin-bottom:28px}
+.main-label{display:block;font-weight:700;margin-bottom:12px}
+input,select,textarea{
+width:100%;
+padding:12px;
+border:2px solid var(--border);
+border-radius:10px;
+font-size:1rem;
+box-sizing:border-box;
+}
+.options-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:10px;
+}
+.option-item{
+display:flex;
+align-items:center;
+background:#fcfcfc;
+padding:12px;
+border:1px solid var(--border);
+border-radius:10px;
+cursor:pointer;
+}
+.option-item input{margin-right:10px}
+.slider-container{display:flex;align-items:center;gap:15px}
+.slider-val{font-weight:bold;color:var(--primary)}
+.submit-btn{
+width:100%;
+padding:16px;
+background:var(--primary);
+color:white;
+border:none;
+border-radius:12px;
+font-size:1.1rem;
+font-weight:bold;
+cursor:pointer;
+}
+.submit-btn:hover{background:var(--primary-dark)}
+#success-screen{display:none;text-align:center;padding:40px}
+</style>
+</head>
+
+<body>
+
+<div class="survey-container">
+
+<div id="survey-form-wrapper">
+<header class="header">
+<h1>PCOS & PCOD Survey</h1>
+<p class="desc">Share your experience anonymously</p>
+</header>
+
+<div class="progress-wrapper">
+<div id="progress-bar"></div>
+</div>
+
+<!-- ✅ NEW FORMSPREE LINK ADDED -->
+<form id="healthForm" action="https://formspree.io/f/mdalzbae" method="POST">
+
+<div class="question-block">
+<label class="main-label">Current Age</label>
+<input type="number" name="age" min="10" max="60" required>
+</div>
+
+<div class="question-block">
+<label class="main-label">Clinical Diagnosis</label>
+<div class="options-grid">
+<label class="option-item"><input type="radio" name="diagnosis" value="PCOS" required>PCOS</label>
+<label class="option-item"><input type="radio" name="diagnosis" value="PCOD">PCOD</label>
+<label class="option-item"><input type="radio" name="diagnosis" value="Suspected">Suspected</label>
+<label class="option-item"><input type="radio" name="diagnosis" value="No">No</label>
+</div>
+</div>
+
+<div class="question-block">
+<label class="main-label">Menstrual Cycle Regularity</label>
+<select name="cycle">
+<option value="">Select</option>
+<option>Regular</option>
+<option>Irregular</option>
+<option>Absent</option>
+</select>
+</div>
+
+<div class="question-block">
+<label class="main-label">Primary Symptoms</label>
+<div class="options-grid">
+<label class="option-item"><input type="checkbox" name="symptoms" value="Acne">Acne</label>
+<label class="option-item"><input type="checkbox" name="symptoms" value="HairLoss">Hair Loss</label>
+<label class="option-item"><input type="checkbox" name="symptoms" value="WeightGain">Weight Gain</label>
+<label class="option-item"><input type="checkbox" name="symptoms" value="BodyHair">Excess Body Hair</label>
+</div>
+</div>
+
+<div class="question-block">
+<label class="main-label">Exercise Frequency</label>
+<div class="options-grid">
+<label class="option-item"><input type="radio" name="exercise" value="0">0 days</label>
+<label class="option-item"><input type="radio" name="exercise" value="1-2">1-2 days</label>
+<label class="option-item"><input type="radio" name="exercise" value="3-5">3-5 days</label>
+<label class="option-item"><input type="radio" name="exercise" value="Daily">Daily</label>
+</div>
+</div>
+
+<div class="question-block">
+<label class="main-label">Daily Stress Level</label>
+<div class="slider-container">
+<input type="range" name="stress" min="1" max="10" value="5" id="stressSlider">
+<span class="slider-val" id="stressVal">5</span>
+</div>
+</div>
+
+<div class="question-block">
+<label class="main-label">Medications / Supplements</label>
+<input type="text" name="medications" placeholder="Metformin, Inositol etc">
+</div>
+
+<div class="question-block">
+<label class="main-label">Mental Health Impact</label>
+<select name="mental">
+<option>Not at all</option>
+<option>Mildly</option>
+<option>Significantly</option>
+</select>
+</div>
+
+<div class="question-block">
+<label class="main-label">Dietary Management</label>
+<select name="diet">
+<option>No specific diet</option>
+<option>Low-GI / Low-Carb</option>
+<option>Keto</option>
+<option>Vegetarian</option>
+</select>
+</div>
+
+<div class="question-block">
+<label class="main-label">Biggest Challenge</label>
+<textarea name="challenge" rows="4"></textarea>
+</div>
+
+<button type="submit" class="submit-btn" id="finalSubmit">Submit</button>
+
+</form>
+</div>
+
+<div id="success-screen">
+<h2>Thank You 💜</h2>
+<p>Your response has been recorded.</p>
+</div>
+
+</div>
+
+<script>
+const form=document.getElementById('healthForm');
+const progressBar=document.getElementById('progress-bar');
+const stressSlider=document.getElementById('stressSlider');
+const stressVal=document.getElementById('stressVal');
+
+stressSlider.oninput=()=>stressVal.innerHTML=stressSlider.value;
+
+form.addEventListener('change',()=>{
+const total=10;
+const data=new FormData(form);
+const filled=new Set();
+for(let e of data.entries()){
+if(e[1]!="")filled.add(e[0]);
+}
+progressBar.style.width=(filled.size/total*100)+'%';
+});
+
+form.addEventListener('submit',async(e)=>{
+e.preventDefault();
+const btn=document.getElementById('finalSubmit');
+btn.innerText="Saving...";
+btn.disabled=true;
+
+const formData=new FormData(form);
+
+const res=await fetch("https://formspree.io/f/mdalzbae",{
+method:"POST",
+body:formData,
+headers:{'Accept':'application/json'}
+});
+
+if(res.ok){
+document.getElementById('survey-form-wrapper').style.display='none';
+document.getElementById('success-screen').style.display='block';
+}else{
+alert("Submission failed");
+btn.innerText="Submit";
+btn.disabled=false;
+}
+});
+</script>
+
+</body>
+</html>
+
